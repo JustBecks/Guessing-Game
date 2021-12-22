@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import SingleCard from './components/SingleCard'
 
 
 //CARD ARRAY
@@ -45,12 +46,9 @@ function App() {
 
       <div className="card-grid">
         {cards.map(card => (
-          <div className="card" key={card.id}>
-            <div>
-              <img className="front" src={card.src} alt="card front" />
-              <img className="back" src="/img/cover.png" alt="card back" />
-            </div>
-          </div>
+          <SingleCard key={card.id} card={card} />
+          //key prop moved to this position since this is the component that maps the cards
+          //added card={card} prop -> this is passed as a deconstructed prop to singlecard.js file to have access to the card props
         ))}
       </div>
     </div>
