@@ -12,8 +12,6 @@ const cardImages = [
   { "src": "/img/scroll-1.png", matched: false},
   { "src": "/img/shield-1.png", matched: false },
   { "src": "/img/sword-1.png", matched: false }
-  //cards will keep matched property set to false when cards are shuffled 
-
 ]
 
 //shuffle card function 
@@ -35,13 +33,12 @@ function App() {
   }
 
   //handle a choice 
+  //three
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
 
   //comparing two cards 
-  //useEffect accepts two arguments, function(), dependency - second is optional 
-  //listens for change of state. Triggers anytime an update happens to the react component 
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       if (choiceOne.src === choiceTwo.src) {
@@ -49,8 +46,6 @@ function App() {
         setCards(prevCards => {
           //returns new array of cards
           return prevCards.map(card => {
-            //fires function for each card 
-            //each time we fire a function, we return the object that we want to return inside the new array we're returning
             if (card.src === choiceOne.src) {
               return {...card, matched: true}
             } else {
@@ -60,8 +55,7 @@ function App() {
         })
         resetTurn()
        } else {
-      
-        resetTurn()
+       setTimeout(() => resetTurn(), 1000)
     }
   }
 }, [choiceOne, choiceTwo])
@@ -86,8 +80,9 @@ const resetTurn = () => {
           <SingleCard 
             key={card.id} 
             card={card} 
-            //passes card to SingleCard object 
             handleChoice={handleChoice}
+            //3 instances where a card should be flipped 
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
             />
         ))}
       </div>

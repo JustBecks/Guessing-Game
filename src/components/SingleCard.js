@@ -1,21 +1,22 @@
 import './SingleCard.css'
 
 //props object 
-export default function SingleCard({ card, handleChoice }) {
+export default function SingleCard({ card, handleChoice, flipped }) {
   //card is a prop that is passed in from app.js so you have access to it here 
 
   const handleClick = () => {
+    //two
     handleChoice(card)
-    //calls function that was passed into props object 
 
   }
   return (
     <div className="card">
-            <div>
+            <div className={flipped ? "flipped" : ""}>
               <img className="front" src={card.src} alt="card front" />
               <img 
                 className="back" 
                 src="/img/cover.png" 
+                //one
                 onClick={handleClick} 
                 alt="card back" 
               />
