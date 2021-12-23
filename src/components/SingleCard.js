@@ -1,13 +1,13 @@
 import './SingleCard.css'
 
 //props object 
-export default function SingleCard({ card, handleChoice, flipped }) {
+export default function SingleCard({ card, handleChoice, flipped, disabled }) {
   //card is a prop that is passed in from app.js so you have access to it here 
 
   const handleClick = () => {
-    //two
+    if(!disabled) {
     handleChoice(card)
-
+    }
   }
   return (
     <div className="card">
@@ -15,8 +15,7 @@ export default function SingleCard({ card, handleChoice, flipped }) {
               <img className="front" src={card.src} alt="card front" />
               <img 
                 className="back" 
-                src="/img/cover.png" 
-                //one
+                src="/img/cover.png"
                 onClick={handleClick} 
                 alt="card back" 
               />
