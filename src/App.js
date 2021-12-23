@@ -95,7 +95,7 @@ useEffect(() => {
             />
         ))}
       </div>
-      <p>Turns: {turns} </p>
+      <p>Turns: {turns}</p>
     </div>
   );
 }
