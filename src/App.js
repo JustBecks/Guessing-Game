@@ -19,24 +19,31 @@ const cardImages = [
 function App() {
     const [cards, setCards] = useState([])
     const [turns, setTurns] = useState(0)
+    const [choiceOne, setChoiceOne] = useState(null)
+    //when user clicks on first card, it will update choice one to be that card 
+    const [choiceTwo, setChoiceTwo] = useState(null)
+     //when user clicks on second card, it will update choice one to be that card 
+
 
   //shuffle cards 
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages] 
     //creates an array of 12 cards (6 each)
     .sort(() => Math.random() - 0.5)
-    //fires a function for each item or pair of items in the above array [...cardImages, ...cardImages]
     .map((card) => ({...card, id: Math.random() }))
-    // ...card: takes the card and it's properties (currently only prop is src )
-    //id: Match.random() sets a random ID on each object
 
     setCards(shuffledCards)
     //updates card state to be shuffled cards 
     setTurns(0)
   }
 
-  console.log(cards,turns)
-  //2 pieces of state
+  //handle a choice 
+  const handleChoice = (card) => {
+  //takes card user has chosen as an arg
+    choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+    //if choiceOne evaluates to null = false, if not null(has a value)= true
+    //it will either run setChoiceTwo() or setChoiceOne() depending on what it evaluates to 
+  }
 
   return (
     //app div
@@ -46,9 +53,14 @@ function App() {
 
       <div className="card-grid">
         {cards.map(card => (
-          <SingleCard key={card.id} card={card} />
-          //key prop moved to this position since this is the component that maps the cards
-          //added card={card} prop -> this is passed as a deconstructed prop to singlecard.js file to have access to the card props
+          <SingleCard 
+            key={card.id} 
+            card={card} 
+            //passes card to SingleCard object 
+            handleChoice={handleChoice}
+            //passed in the handle choice function to the single card component 
+            //it takes the card argument that is then logged to console 
+            />
         ))}
       </div>
     </div>
