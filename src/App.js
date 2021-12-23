@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import './App.css'
 import SingleCard from './components/SingleCard'
 
@@ -20,30 +20,43 @@ function App() {
     const [cards, setCards] = useState([])
     const [turns, setTurns] = useState(0)
     const [choiceOne, setChoiceOne] = useState(null)
-    //when user clicks on first card, it will update choice one to be that card 
     const [choiceTwo, setChoiceTwo] = useState(null)
-     //when user clicks on second card, it will update choice one to be that card 
 
 
   //shuffle cards 
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages] 
-    //creates an array of 12 cards (6 each)
     .sort(() => Math.random() - 0.5)
     .map((card) => ({...card, id: Math.random() }))
 
     setCards(shuffledCards)
-    //updates card state to be shuffled cards 
     setTurns(0)
   }
 
   //handle a choice 
   const handleChoice = (card) => {
-  //takes card user has chosen as an arg
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
-    //if choiceOne evaluates to null = false, if not null(has a value)= true
-    //it will either run setChoiceTwo() or setChoiceOne() depending on what it evaluates to 
   }
+
+  //comparing cards 
+  useEffect(() => {
+    if (choiceOne && choiceTwo) {
+      if (choiceOne.src === choiceTwo.src) {
+        console.log('Those cards match!')
+        resetTurn()
+       } else {
+        console.log('Those cards do not match!')
+        resetTurn()
+    }
+  }
+}, [choiceOne, choiceTwo])
+
+//reset choices & increase turn 
+const resetTurn = () => {
+  setChoiceOne(null)
+  setChoiceTwo(null)
+  setTurns(prevTurns => prevTurns + 1)
+}
 
   return (
     //app div
@@ -58,8 +71,6 @@ function App() {
             card={card} 
             //passes card to SingleCard object 
             handleChoice={handleChoice}
-            //passed in the handle choice function to the single card component 
-            //it takes the card argument that is then logged to console 
             />
         ))}
       </div>
