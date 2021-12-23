@@ -6,12 +6,13 @@ import SingleCard from './components/SingleCard'
 //CARD ARRAY
 //each is an object with 1 prop 
 const cardImages = [
-  { "src": "/img/helmet-1.png" },
-  { "src": "/img/potion-1.png" },
-  { "src": "/img/ring-1.png" },
-  { "src": "/img/scroll-1.png" },
-  { "src": "/img/shield-1.png" },
-  { "src": "/img/sword-1.png" },
+  { "src": "/img/helmet-1.png", matched: false },
+  { "src": "/img/potion-1.png", matched: false },
+  { "src": "/img/ring-1.png", matched: false },
+  { "src": "/img/scroll-1.png", matched: false},
+  { "src": "/img/shield-1.png", matched: false },
+  { "src": "/img/sword-1.png", matched: false }
+  //cards will keep matched property set to false when cards are shuffled 
 
 ]
 
@@ -38,18 +39,34 @@ function App() {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
 
-  //comparing cards 
+  //comparing two cards 
+  //useEffect accepts two arguments, function(), dependency - second is optional 
+  //listens for change of state. Triggers anytime an update happens to the react component 
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       if (choiceOne.src === choiceTwo.src) {
-        console.log('Those cards match!')
+        //updates card state
+        setCards(prevCards => {
+          //returns new array of cards
+          return prevCards.map(card => {
+            //fires function for each card 
+            //each time we fire a function, we return the object that we want to return inside the new array we're returning
+            if (card.src === choiceOne.src) {
+              return {...card, matched: true}
+            } else {
+              return card
+            }
+          })
+        })
         resetTurn()
        } else {
-        console.log('Those cards do not match!')
+      
         resetTurn()
     }
   }
 }, [choiceOne, choiceTwo])
+
+console.log(cards)
 
 //reset choices & increase turn 
 const resetTurn = () => {
