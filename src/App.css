@@ -5,7 +5,7 @@
 }
 button {
   background: none;
-  border: 2px solid #fff;
+  border: 3px dotted #fff;
   padding: 6px 12px;
   border-radius: 4px;
   color: #fff;
@@ -14,7 +14,7 @@ button {
   font-size: 1em;
 }
 button:hover {
-  background: #c23866;
+  background: #08af61;
   color: #fff;
 }
 /* targets card-grid div in app.js */
@@ -24,3 +24,18 @@ button:hover {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
  }
+
+ .cardImages {
+  height: auto;
+  max-height: 250px;
+  width: auto;
+  max-width: 1px;
+}
+
+.box {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+}

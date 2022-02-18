@@ -6,12 +6,12 @@ import SingleCard from './components/SingleCard'
 //CARD ARRAY
 //each is an object with 1 prop 
 const cardImages = [
-  { "src": "/img/helmet-1.png", matched: false },
-  { "src": "/img/potion-1.png", matched: false },
-  { "src": "/img/ring-1.png", matched: false },
-  { "src": "/img/scroll-1.png", matched: false},
-  { "src": "/img/shield-1.png", matched: false },
-  { "src": "/img/sword-1.png", matched: false }
+  { "src": "/img/tiger-1.png", matched: false },
+  { "src": "/img/butterfly-1.png", matched: false },
+  { "src": "/img/frog-1.png", matched: false },
+  { "src": "/img/chamelion-1.png", matched: false},
+  { "src": "/img/birds-1.png", matched: false },
+  { "src": "/img/monkey-1.png", matched: false }
 ]
 
 //shuffle card function 
@@ -79,7 +79,7 @@ useEffect(() => {
   return (
     //app div
     <div className="App">
-      <h1>Magic Match</h1>
+      <h1>Jungle Matching Game</h1>
       <button onClick={shuffleCards}>New Game</button>
 
       <div className="card-grid">
